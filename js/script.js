@@ -1,3 +1,4 @@
+$(document).ready(function(){
 $("#qbutton").on("click",function(d){
 	d.preventDefault();
 	$.ajax({
@@ -6,11 +7,12 @@ $("#qbutton").on("click",function(d){
     success:function(data){
     console.log(data);
     data.forEach(function(val){
-     $("#heading").append(val.title );
-     $("#displayQuote").append(val.content);
+     $("#heading").html(val.title );
+     $("#displayQuote").html(val.content);
     });
 
     },
-
+    cache:false,
 	});
+ });
 });
