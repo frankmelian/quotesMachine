@@ -1,18 +1,22 @@
 $(document).ready(function(){
 $("#qbutton").on("click",function(d){
 	d.preventDefault();
+    $.support.cors = true;
 	$.ajax({
-    url:'http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1&callback=',
+    url:'http://quotes.stormconsultancy.co.uk/random.json',
     type:"GET",
+    crossDomain:true,
     success:function(data){
-    console.log(data);
-    data.forEach(function(val){
-     $("#heading").html(val.title );
-     $("#displayQuote").html(val.content);
-    });
-
+    $("#heading").html(data.author);
+    $("#displayQuote").html(data.quote);
+    var share = data.quote;
+    $('#tweet').attr('href', 'https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text='
+     + encodeURIComponent('"' + share + '"'))
     },
     cache:false,
 	});
  });
+
 });
+
+
